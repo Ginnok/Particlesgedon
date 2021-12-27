@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
-    public float jumpForce;
+    public float jetpackForce = 75.0f;
     
     Rigidbody2D rb;
     Collider2D myCollider;
-
-    public bool isGrounded;
-    public LayerMask whatIsGround;
     
     void Start()
     {
@@ -21,18 +19,33 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        moveSpeed += Time.deltaTime* 1;
-        isGrounded = Physics2D.IsTouchingLayers(myCollider, whatIsGround);
         rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-        if (Input.GetButtonDown("Jump"))
-        Jump();
+        if(moveSpeed < 0|| moveSpeed == 0)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
     
-    private void Jump()
+void FixedUpdate()
     {
-    if(isGrounded)
+        bool jetpackActive = Input.GetButton("Jump");
+        if (jetpackActive)
+        {
+            rb.AddForce(new Vector2(0, jetpackForce));
+        }
+    }
+        private void OnTriggerEnter2D(Collider2D other)
     {
-    rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        if (other.CompareTag("speedBoost"))
+        {
+            moveSpeed += 5;
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("speedLet"))
+        {
+            moveSpeed -= 5;
+            Destroy(other.gameObject);
+        }
     }
-    }
+    
 }

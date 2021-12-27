@@ -35,10 +35,10 @@ public class PlatformGenerator : MonoBehaviour
             transform.position = new Vector3(transform.position.x + platformsWidth[platformSelector] + distanceBetween, transform.position.y, transform.position.z);
 
             GameObject newPlatform = platformsM[platformSelector].GetPlatform();
-
+            
             newPlatform.transform.position = transform.position;
             newPlatform.transform.rotation = transform.rotation;
-            newPlatform.SetActive(true);     
+            newPlatform.SetActive(true);      
         }
     }
 }
