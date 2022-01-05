@@ -6,6 +6,7 @@ TagManager:
   tags:
   - speedBoost
   - speedLet
+  - speedCheck
   layers:
   - Default
   - TransparentFX

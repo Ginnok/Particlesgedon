@@ -4,28 +4,34 @@ using UnityEngine;
 
 public class LetGenerator : MonoBehaviour
 {
-   public GameObject _let;
-   public float _minX;
-   public float _maxX;
-   public float _minY;
-   public float _maxY;
-   public float _timeBetweenSpawn;
-   private float _spwanTime; 
+   public GameObject let;
+   public float minX;
+   public float maxX;
+   public float minY;
+   public float maxY;
+   private float timeBetweenSpawn;
+   private float spwanTime; 
+   public float tbsMin;
+   public float tbsMax;
 
+    void Start()
+    {
+      timeBetweenSpawn = Random.Range(tbsMin, tbsMax);
+    }
     void Update()
     {
-      if(Time.time > _spwanTime)
+      if(Time.time > spwanTime)
       {
         Spawn();
-        _spwanTime = Time.time + _timeBetweenSpawn;
+        spwanTime = Time.time + timeBetweenSpawn;
       }  
     }
 
     void Spawn()
     {
-    float randomX = Random.Range(_minX,_maxX);
-    float randomY = Random.Range(_minY,_maxY);
+    float randomX = Random.Range(minX,maxX);
+    float randomY = Random.Range(minY,maxY);
 
-    Instantiate(_let, transform.position + new Vector3(randomX, randomY, 0), transform.rotation);
+    Instantiate(let, transform.position + new Vector3(randomX, randomY, 0), transform.rotation);
     }
 }
