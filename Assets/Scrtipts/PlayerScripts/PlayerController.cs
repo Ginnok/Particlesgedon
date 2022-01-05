@@ -46,6 +46,17 @@ void FixedUpdate()
             moveSpeed -= 5;
             Destroy(other.gameObject);
         }
+        if (other.CompareTag("speedCheck"))
+        {
+            if(moveSpeed >= 25)
+            {
+            Destroy(other.gameObject);
+            }
+            else
+            {
+            SceneManager.LoadScene(0);
+            }
+        }
     }
     
 }
