@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LetGenerator : MonoBehaviour
 {
-   public GameObject let;
+  //  private GameObject Object;
    public float minX;
    public float maxX;
    public float minY;
@@ -13,9 +13,13 @@ public class LetGenerator : MonoBehaviour
    private float spwanTime; 
    public float tbsMin;
    public float tbsMax;
+   
+   public GameObject[] Objects;
+   private int random;
 
     void Start()
     {
+      
       timeBetweenSpawn = Random.Range(tbsMin, tbsMax);
     }
     void Update()
@@ -29,9 +33,10 @@ public class LetGenerator : MonoBehaviour
 
     void Spawn()
     {
+    random = Random.Range(0, Objects.Length);
     float randomX = Random.Range(minX,maxX);
     float randomY = Random.Range(minY,maxY);
-
-    Instantiate(let, transform.position + new Vector3(randomX, randomY, 0), transform.rotation);
+    Instantiate(Objects[random], transform.position + new Vector3(randomX, randomY, 0), transform.rotation);
     }
+    
 }
