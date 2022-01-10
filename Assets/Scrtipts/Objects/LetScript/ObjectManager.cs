@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class ObjectManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+   public GameObject Object;
+
+   public int ObjectAmount;
+
+   List<GameObject> Objects;
+
     void Start()
     {
-        
-    }
+        Objects = new List<GameObject>();
 
-    // Update is called once per frame
-    void Update()
+        for(int i = 0; i < ObjectAmount; i++)
+        {
+            GameObject obj = (GameObject) Instantiate(Object);
+            obj.SetActive(false);
+            Objects.Add(obj);
+        } 
+    }
+    public GameObject GetPlatform()
     {
-        
+        for(int i = 0; i < Objects.Count; i++)
+        {
+            if(!Objects[i].activeInHierarchy)
+            {
+                return Objects[i];
+            }
+        } 
+            GameObject obj = (GameObject) Instantiate(Object);
+            obj.SetActive(false);
+            Objects.Add(obj);
+            return obj;
     }
 }
